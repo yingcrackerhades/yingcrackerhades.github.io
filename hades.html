@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pwnme Hades</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body {
+      background: black;
+      overflow: hidden;
+    }
+
+    .matrix-container {
+      color: white;
+      text-shadow: 1px 1px 5px cyan;
+      font-family: monospace;
+      font-size: 20px;
+      line-height: 30px;
+      text-align: center;
+    }
+
+    .social-icons {
+      margin-top: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .social-icons a {
+      color: white;
+      text-shadow: 1px 1px 5px cyan;
+      font-size: 40px;
+      margin: 0 10px;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: red;
+    }
+    .custom-image-class {
+      border-radius: 50%;
+    }
+
+
+    @media (min-width: 768px) {
+      .matrix-container {
+        font-size: 36px;
+        line-height: 42px;
+      }
+
+      .social-icons a {
+        font-size: 50px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+</head>
+<body>
+  <div class="matrix-container"></div>
+
+  <div class="social-icons">
+    <a href="https://github.com/yingcrackerhades"><i class="fab fa-github"></i></a>
+    <a href="http://instagram.com/yinghades_"><i class="fab fa-instagram"></i></a>
+    <a href="mailto:hadespwn0@gmail.com"><i class="fas fa-envelope"></i></a>
+    <a href="#" id="discord-icon"><i class="fab fa-discord"></i></a>
+  </div>
+
+  <script>
+    const container = document.querySelector('.matrix-container');
+
+    const chars = ['0', '1'];
+    const numCols = 26;
+    const numRows = 13;
+    const delay = 100;
+
+    function generateMatrixAnimation() {
+      let animation = '';
+
+      for (let row = 0; row < numRows; row++) {
+        for (let col = 0; col < numCols; col++) {
+          let char;
+
+          if ((row < 5 || row > 7) && (col >= 8 && col <= 17)) {
+            char = '&nbsp;';
+          } else {
+            char = chars[Math.floor(Math.random() * chars.length)];
+          }
+
+          animation += char;
+        }
+
+        animation += '<br>';
+      }
+
+      container.innerHTML = animation;
+    }
+
+    function showSweetAlert() {
+      Swal.fire({
+        title: 'Username:',
+        text: '.pwn0',
+        icon: '',
+        confirmButtonText: 'OK',
+        imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD-bxs_EsweSu3kaHVy0TuHuiLFjm8RatGpg&usqp=CAU',
+        imageWidth: 200,
+        imageHeight: 200,
+        imageAlt: 'Custom Logo',
+        customClass: {
+          image: 'custom-image-class'
+        }
+      });
+    }
+
+    function startMatrixAnimation() {
+      setInterval(generateMatrixAnimation, delay);
+    }
+
+    startMatrixAnimation();
+
+    const discordIcon = document.getElementById('discord-icon');
+    discordIcon.addEventListener('click', showSweetAlert);
+  </script>
+</body>
+</html>
